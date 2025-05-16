@@ -18,7 +18,6 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
         <tr>
             <th>School</th>
             <th>Effect</th>
-            <th>Type</th>
             <th>Magnitude</th>
             <th>Area</th>
             <th>Duration</th>
@@ -44,65 +43,59 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
     function addRow() {
         const row = document.createElement('tr');
 
-        // 4.1 Select de School
+        // 4.1 Select de School (sm)
         const schoolCell = document.createElement('td');
         schoolCell.setAttribute('data-label', 'School');
         const schoolSelect = document.createElement('select');
-        schoolSelect.className = 'form-select';
+        schoolSelect.className = 'form-select form-select-sm';
         schoolSelect.innerHTML = `<option value="">Select School...</option>`;
         schools.forEach(s => {
             const o = document.createElement('option');
-            o.value = s;
-            o.textContent = s;
+            o.value = s; o.textContent = s;
             schoolSelect.appendChild(o);
         });
         schoolCell.appendChild(schoolSelect);
 
-        // 4.2 Select de Effect (inicial desabilitado)
+        // 4.2 Select de Effect (sm)
         const effectCell = document.createElement('td');
         effectCell.setAttribute('data-label', 'Effect');
         const effectSelect = document.createElement('select');
-        effectSelect.className = 'form-select';
+        effectSelect.className = 'form-select form-select-sm';
         effectSelect.disabled = true;
         effectSelect.innerHTML = `<option value="">Select Effect...</option>`;
         effectCell.appendChild(effectSelect);
 
-        // 4.3 Type (placeholder)
-        const typeCell = document.createElement('td');
-        typeCell.setAttribute('data-label', 'Type');
-        typeCell.textContent = '—';
-
-        // 4.4 Magnitude
+        // 4.3 Magnitude (sm)
         const magCell = document.createElement('td');
         magCell.setAttribute('data-label', 'Magnitude');
         const magInput = document.createElement('input');
         magInput.type = 'number';
-        magInput.className = 'form-control';
+        magInput.className = 'form-control form-control-sm';
         magInput.min = 0;
         magInput.placeholder = '0';
         magCell.appendChild(magInput);
 
-        // 4.5 Area
+        // 4.4 Area (sm)
         const areaCell = document.createElement('td');
         areaCell.setAttribute('data-label', 'Area');
         const areaInput = document.createElement('input');
         areaInput.type = 'number';
-        areaInput.className = 'form-control';
+        areaInput.className = 'form-control form-control-sm';
         areaInput.min = 0;
         areaInput.placeholder = '0';
         areaCell.appendChild(areaInput);
 
-        // 4.6 Duration
+        // 4.5 Duration (sm)
         const durCell = document.createElement('td');
         durCell.setAttribute('data-label', 'Duration');
         const durInput = document.createElement('input');
         durInput.type = 'number';
-        durInput.className = 'form-control';
+        durInput.className = 'form-control form-control-sm';
         durInput.min = 0;
         durInput.placeholder = '0';
         durCell.appendChild(durInput);
 
-        // 4.7 Actions: botão remover
+        // 4.6 Actions: botão remover
         const actionCell = document.createElement('td');
         actionCell.setAttribute('data-label', 'Actions');
         const removeBtn = document.createElement('button');
@@ -111,11 +104,10 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
         removeBtn.onclick = () => row.remove();
         actionCell.appendChild(removeBtn);
 
-        // 4.8 Monta a linha
+        // 4.7 Monta a linha
         row.append(
             schoolCell,
             effectCell,
-            typeCell,
             magCell,
             areaCell,
             durCell,
@@ -123,7 +115,7 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
         );
         tbody.appendChild(row);
 
-        // 5. Quando muda a escola, popula os efeitos
+        // 5. Popula efeitos ao mudar escola
         schoolSelect.onchange = () => {
             const school = schoolSelect.value;
             effectSelect.innerHTML = `<option value="">Select Effect...</option>`;
@@ -142,6 +134,7 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
             }
         };
     }
+
 
     // Linha inicial
     addRow();

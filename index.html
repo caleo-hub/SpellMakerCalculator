@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Magic School Skills</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
+
 <body class="container py-4">
 
   <h1 class="mb-4">Magic School Skills</h1>
-  <button class="btn btn-outline-primary mb-3" type="button"
-          data-bs-toggle="collapse" data-bs-target="#skillsTable"
-          aria-expanded="true" aria-controls="skillsTable">
+  <button class="btn btn-outline-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#skillsTable"
+    aria-expanded="true" aria-controls="skillsTable">
     Toggle Skills Table
   </button>
 
   <div class="table-responsive">
+    <h2 class="mt-5 mb-3">Skills Table</h2>
     <table class="table table-bordered align-middle text-center">
       <thead class="table-light">
         <tr>
@@ -31,14 +33,14 @@
   </div>
 
   <h2 class="mt-5 mb-3">Spell Builder</h2>
-  <div id="spellBuilderContainer"></div>
+  <div id="spellBuilderContainer" class="spell-builder-container"></div>
 
   <!-- Scripts -->
   <script src="assets/js/skillTable.js"></script>
   <script>
     createSkillTable([
-      'Alteration','Conjuration','Destruction',
-      'Illusion','Mysticism','Restoration','Luck'
+      'Alteration', 'Conjuration', 'Destruction',
+      'Illusion', 'Mysticism', 'Restoration', 'Luck'
     ], 'skillsTable');
   </script>
 
@@ -48,5 +50,22 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+  <h2 class="mt-5 mb-3">Spell Stats</h2>
+  <div id="spellStatsContainer"></div>
+  <script type="module">
+    import { initializeSpellStats, updateSpellStats } from './assets/js/spellStats.js';
+
+    // Inicializa tabela de stats
+    initializeSpellStats("spellStatsContainer");
+
+    // Atualiza automaticamente após qualquer modificação
+    const observer = new MutationObserver(() => updateSpellStats());
+    observer.observe(document.getElementById("spellBuilderContainer"), { childList: true, subtree: true });
+    observer.observe(document.getElementById("skillsTable"), { childList: true, subtree: true });
+</script>
 </body>
+
 </html>
