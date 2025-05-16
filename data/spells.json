@@ -1,0 +1,76 @@
+{
+  "Restoration": {
+    "Absorb Attribute": {},
+    "Absorb Fatigue": {},
+    "Absorb Health": {},
+    "Absorb Magicka": {},
+    "Absorb Skill": {},
+    "Cure": {},
+    "Fortify Fatigue": {},
+    "Fortify Health": {},
+    "Fortify Magicka": {},
+    "Fortify Skill": {},
+    "Fortify Attribute": {},
+    "Restore Attribute": {},
+    "Restore Fatigue": {},
+    "Restore Health": {},
+    "Resist Magic": {}
+  },
+  "Conjuration": {
+    "Bound Armor": {},
+    "Bound Weapon": {},
+    "Summon": {},
+    "Turn Undead": {}
+  },
+  "Alteration": {
+    "Burden": {},
+    "Feather": {},
+    "Shield": {},
+    "Shock Shield": {},
+    "Fire Shield": {},
+    "Frost Shield": {},
+    "Open": {},
+    "Water Breathing": {},
+    "Water Walking": {}
+  },
+  "Illusion": {
+    "Calm": {},
+    "Chameleon": {},
+    "Charm": {},
+    "Command Creature": {},
+    "Command Humanoid": {},
+    "Demoralize": {},
+    "Frenzy": {},
+    "Invisibility": {},
+    "Light": {},
+    "Night-Eye": {},
+    "Paralyze": {},
+    "Rally": {},
+    "Silence": {}
+  },
+  "Destruction": {
+    "Damage Fatigue": {},
+    "Damage Health": {},
+    "Damage Magicka": {},
+    "Damage Attribute": {},
+    "Disintegrate Armor": {},
+    "Disintegrate Weapon": {},
+    "Drain Attribute": {},
+    "Drain Fatigue": {},
+    "Drain Health": {},
+    "Drain Magicka": {},
+    "Drain Skill": {},
+    "Fire Damage": {},
+    "Frost Damage": {},
+    "Shock Damage": {},
+    "Weakness": {}
+  },
+  "Mysticism": {
+    "Detect Life": {},
+    "Dispel": {},
+    "Reflect Spell": {},
+    "Soul Trap": {},
+    "Spell Absorption": {},
+    "Telekinesis": {}
+  }
+}

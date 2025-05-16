@@ -1,4 +1,35 @@
 .skill-input {
-    width: 60px;
-    text-align: center;
+  width: 60px;
+  text-align: center;
+}
+
+/* === Responsividade para <576px (xs) === */
+@media (max-width: 575.98px) {
+  /* Esconde o header da tabela */
+  table thead {
+    display: none;
+  }
+  /* Faz cada linha virar bloco (card-like) */
+  table, table tbody, table tr, table td {
+    display: block;
+    width: 100%;
+  }
+  /* Espaçamento entre “cards” */
+  table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    padding: .5rem;
+  }
+  /* Cada célula vira linha flex */
+  table td {
+    display: flex;
+    justify-content: space-between;
+    padding: .25rem 0;
+  }
+  /* Insere label antes do valor, usando atributo data-label */
+  table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+  }
 }
