@@ -1,71 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-bs-theme="auto">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Magic School Skills</title>
+
+  <!-- SEO básico -->
+  <title>Oblivion SpellMaker Calculator – Magic School Skills & Builder</title>
+  <meta name="description" content="Instant web tool to craft and optimize custom spells for The Elder Scrolls IV: Oblivion. Magic School Skills, Spell Builder & Spell Stats in one responsive PWA-ready interface." />
+  <meta name="keywords" content="Oblivion, SpellMaker, Spell Calculator, Magic School, Spell Builder" />
+  <link rel="canonical" href="https://your-domain.com/" />
+
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Seu CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Script para aplicar dark/light mode automaticamente -->
+  <script>
+    (function() {
+      const userPref = localStorage.getItem('theme');
+      const systemPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-bs-theme', userPref || systemPref);
+    })();
+  </script>
 </head>
 
 <body class="container py-4">
+  <header class="mb-5">
+    <h1 class="display-6">Magic School Skills</h1>
+    <p class="text-muted">Craft and manage your custom Oblivion spells instantly.</p>
+  </header>
 
-  <h1 class="mb-4">Magic School Skills</h1>
-  <button class="btn btn-outline-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#skillsTable"
-    aria-expanded="true" aria-controls="skillsTable">
-    Toggle Skills Table
-  </button>
+  <main>
+    <!-- Skills Table -->
+    <section class="mb-5">
+      <button class="btn btn-outline-primary mb-3" type="button"
+              data-bs-toggle="collapse" data-bs-target="#skillsTable"
+              aria-expanded="true" aria-controls="skillsTable">
+        Toggle Skills Table
+      </button>
 
-  <div class="table-responsive">
-    <h2 class="mt-5 mb-3">Skills Table</h2>
-    <table class="table table-bordered align-middle text-center">
-      <thead class="table-light">
-        <tr>
-          <th>School</th>
-          <th>Level</th>
-        </tr>
-      </thead>
-      <tbody id="skillsTable" class="collapse show">
-        <!-- JS popula e insere data-label -->
-      </tbody>
-    </table>
-  </div>
+      <div class="table-responsive">
+        <h2 class="h5 mb-3">Skills Table</h2>
+        <table class="table table-bordered align-middle text-center">
+          <thead class="table-light">
+            <tr>
+              <th>School</th>
+              <th>Level</th>
+            </tr>
+          </thead>
+          <tbody id="skillsTable" class="collapse show">
+            <!-- Populado por JS com data-label -->
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  <h2 class="mt-5 mb-3">Spell Builder</h2>
-  <div id="spellBuilderContainer" class="spell-builder-container"></div>
+    <!-- Spell Builder -->
+    <section class="mb-5">
+      <h2 class="h5 mb-3">Spell Builder</h2>
+      <div id="spellBuilderContainer" class="spell-builder-container"></div>
+    </section>
+
+    <!-- Spell Stats -->
+    <section class="mb-5">
+      <h2 class="h5 mb-3">Spell Stats</h2>
+      <div id="spellStatsContainer"></div>
+    </section>
+  </main>
+
+  <!-- Espaço reservado para propaganda -->
+  <aside class="my-5 text-center">
+    <!-- AD SLOT: coloque aqui seu script de AdSense ou HTML de banner -->
+  </aside>
+
+<footer class="text-center text-muted py-4 small">
+  <p class="mb-1">&copy; 2025 SpellMaker Calculator — A fan project for the Elder Scrolls community.</p>
+  <p class="mb-1">Not affiliated with or endorsed by Bethesda Softworks or ZeniMax Media.</p>
+  <p>
+    <a href="/privacy.html">Privacy Policy</a> • 
+    <a href="/terms.html">Terms of Use</a>
+  </p>
+</footer>
 
   <!-- Scripts -->
   <script src="assets/js/skillTable.js"></script>
   <script>
-    createSkillTable([
-      'Alteration', 'Conjuration', 'Destruction',
-      'Illusion', 'Mysticism', 'Restoration', 'Luck'
-    ], 'skillsTable');
+    createSkillTable(
+      ['Alteration','Conjuration','Destruction','Illusion','Mysticism','Restoration','Luck'],
+      'skillsTable'
+    );
   </script>
 
   <script src="assets/js/spellBuilder.js"></script>
   <script>
-    createSpellBuilderTable("spellBuilderContainer", "data/spells.json");
+    createSpellBuilderTable("spellBuilderContainer","data/spells.json");
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-  <h2 class="mt-5 mb-3">Spell Stats</h2>
-  <div id="spellStatsContainer"></div>
+  <!-- Spell Stats (module) -->
   <script type="module">
     import { initializeSpellStats, updateSpellStats } from './assets/js/spellStats.js';
 
-    // Inicializa tabela de stats
     initializeSpellStats("spellStatsContainer");
 
-    // Atualiza automaticamente após qualquer modificação
     const observer = new MutationObserver(() => updateSpellStats());
-    observer.observe(document.getElementById("spellBuilderContainer"), { childList: true, subtree: true });
-    observer.observe(document.getElementById("skillsTable"), { childList: true, subtree: true });
-</script>
-</body>
+    observer.observe(
+      document.getElementById("spellBuilderContainer"),
+      { childList: true, subtree: true }
+    );
+    observer.observe(
+      document.getElementById("skillsTable"),
+      { childList: true, subtree: true }
+    );
+  </script>
 
+  <!-- Bootstrap Bundle (JS + Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

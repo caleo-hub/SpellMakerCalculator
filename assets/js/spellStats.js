@@ -9,11 +9,11 @@ export function initializeSpellStats(containerId) {
     thead.className = 'table-light';
     thead.innerHTML = `
         <tr>
-            <th>Magicka Cost</th>
-            <th>Master Cost</th>
-            <th>Gold Cost</th>
-            <th>School</th>
-            <th>Level</th>
+            <th><b>Magicka Cost</b></th>
+            <th><b>Master Cost</b></th>
+            <th><b>Gold Cost</b></th>
+            <th><b>School</b></th>
+            <th><b>Level</b></th>
         </tr>
     `;
     const tbody = document.createElement('tbody');

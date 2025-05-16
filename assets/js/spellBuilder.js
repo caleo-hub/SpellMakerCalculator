@@ -16,12 +16,12 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
     thead.className = 'table-light';
     thead.innerHTML = `
         <tr>
-            <th>School</th>
-            <th>Effect</th>
-            <th>Magnitude</th>
-            <th>Area</th>
-            <th>Duration</th>
-            <th>Actions</th>
+            <th><strong>School</strong></th>
+            <th><strong>Effect</strong></th>
+            <th><strong>Magnitude</strong></th>
+            <th><strong>Area</strong></th>
+            <th><strong>Duration</strong></th>
+            <th><strong>Actions</strong></th>
         </tr>
     `;
     table.appendChild(thead);

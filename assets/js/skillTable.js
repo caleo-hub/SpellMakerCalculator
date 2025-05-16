@@ -7,8 +7,11 @@ function createSkillTable(schools, tableId) {
 
         const nameCell = document.createElement('td');
         nameCell.textContent = school;
+        nameCell.style.fontWeight = 'bold';
 
         const controlCell = document.createElement('td');
+        controlCell.style.fontWeight = 'bold';
+
         const group = document.createElement('div');
         group.className = 'd-flex justify-content-center align-items-center gap-2';
 
