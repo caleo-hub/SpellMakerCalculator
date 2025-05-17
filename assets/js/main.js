@@ -119,7 +119,7 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
   btnSaveChar.addEventListener('click', async () => {
     const uid  = getUserUID();
     const name = charNameInput.value.trim();
-    if (!name) return alert('Informe nome do personagem');
+    if (!name) return alert('Enter the character name');
     const skills = extractSkillData();
     const data = { name, skills, updatedAt: Date.now() };
     await saveCharacter(uid, data, charSelect.value || null);
@@ -128,12 +128,12 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
     charNameInput.value = '';
   });
 
-  // deleta personagem
+  // delete character
   btnDeleteChar.addEventListener('click', async () => {
     const uid = getUserUID();
     const id  = charSelect.value;
-    if (!id) return alert('Selecione um personagem');
-    if (!confirm('Excluir este personagem?')) return;
+    if (!id) return alert('Select a character');
+    if (!confirm('Delete this character?')) return;
     await deleteCharacter(uid, id);
     const updated = await loadCharacters(uid);
     populateDropdown(charSelect, updated);
@@ -144,7 +144,7 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
   btnSaveSpell.addEventListener('click', async () => {
     const uid  = getUserUID();
     const name = spellNameInput.value.trim();
-    if (!name) return alert('Informe nome da magia');
+    if (!name) return alert('Enter the spell name');
     const effects = extractSpellData();
     const data = { name, effects, updatedAt: Date.now() };
     await saveSpell(uid, data, spellSelect.value || null);
@@ -157,8 +157,8 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
   btnDeleteSpell.addEventListener('click', async () => {
     const uid = getUserUID();
     const id  = spellSelect.value;
-    if (!id) return alert('Selecione uma magia');
-    if (!confirm('Excluir esta magia?')) return;
+    if (!id) return alert('Select a spell');
+    if (!confirm('Delete this spell?')) return;
     await deleteSpell(uid, id);
     const updated = await loadSpells(uid);
     populateDropdown(spellSelect, updated);
@@ -257,7 +257,7 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
 
   // popula um <select> com opções
   function populateDropdown(sel, items) {
-    sel.innerHTML = '<option value="">— selecione —</option>';
+    sel.innerHTML = '<option value="">— select —</option>';
     items.forEach(({ id, name }) => {
       const o = document.createElement('option');
       o.value = id;
