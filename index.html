@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +8,12 @@
   <!-- SEO básico -->
   <title>Spellmaking Altar Calculator – Craft and Calculate Spells</title>
   <meta name="description"
-        content="Instant web tool to craft and optimize custom spells for The Elder Scrolls IV: Oblivion. Magic School Skills, Spell Builder & Spell Stats" />
+    content="Instant web tool to craft and optimize custom spells for The Elder Scrolls IV: Oblivion. Magic School Skills, Spell Builder & Spell Stats" />
   <meta name="keywords" content="Oblivion, SpellMaker, Spell Calculator, Magic School, Spell Builder" />
   <link rel="canonical" href="https://your-domain.com/" />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7920787159543858"
+    crossorigin="anonymous"></script>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -19,8 +23,8 @@
 
   <!-- Dark/Light mode automático -->
   <script>
-    (function() {
-      const userPref   = localStorage.getItem('theme');
+    (function () {
+      const userPref = localStorage.getItem('theme');
       const systemPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.setAttribute('data-bs-theme', userPref || systemPref);
     })();
@@ -38,8 +42,8 @@
         <!-- Login / Logout -->
         <div class="auth-controls d-flex gap-2">
           <button id="btnGoogleLogin" class="btn google-btn">
-            <img src="https://developers.google.com/identity/images/g-logo.png"
-                 alt="Google logo" width="18" height="18">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" width="18"
+              height="18">
             <span>Sign in with Google</span>
           </button>
           <button id="btnLogout" class="btn btn-outline-danger d-none">Logout</button>
@@ -48,17 +52,17 @@
         <!-- Characters CRUD -->
         <div class="crud-controls d-flex flex-wrap gap-2">
           <select id="charSelect" class="form-select form-select-sm" disabled></select>
-          <input  id="charName"   type="text"   class="form-control form-control-sm" placeholder="Character name" disabled>
-          <button id="btnSaveChar"   class="btn btn-sm btn-success" disabled>Save</button>
-          <button id="btnDeleteChar" class="btn btn-sm btn-danger"  disabled>Delete</button>
+          <input id="charName" type="text" class="form-control form-control-sm" placeholder="Character name" disabled>
+          <button id="btnSaveChar" class="btn btn-sm btn-success" disabled>Save</button>
+          <button id="btnDeleteChar" class="btn btn-sm btn-danger" disabled>Delete</button>
         </div>
 
         <!-- Spells CRUD -->
         <div class="crud-controls d-flex flex-wrap gap-2">
           <select id="spellSelect" class="form-select form-select-sm" disabled></select>
-          <input  id="spellName"  type="text"   class="form-control form-control-sm" placeholder="Spell name" disabled>
-          <button id="btnSaveSpell"   class="btn btn-sm btn-success" disabled>Save</button>
-          <button id="btnDeleteSpell" class="btn btn-sm btn-danger"  disabled>Delete</button>
+          <input id="spellName" type="text" class="form-control form-control-sm" placeholder="Spell name" disabled>
+          <button id="btnSaveSpell" class="btn btn-sm btn-success" disabled>Save</button>
+          <button id="btnDeleteSpell" class="btn btn-sm btn-danger" disabled>Delete</button>
         </div>
       </div>
     </header>
@@ -66,12 +70,8 @@
     <main>
       <!-- Skills Table -->
       <section class="mb-5">
-        <button class="btn btn-outline-primary mb-3"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#skillsTable"
-                aria-expanded="true"
-                aria-controls="skillsTable">
+        <button class="btn btn-outline-primary mb-3" type="button" data-bs-toggle="collapse"
+          data-bs-target="#skillsTable" aria-expanded="true" aria-controls="skillsTable">
           Toggle Skills Table
         </button>
         <div class="table-responsive">
@@ -108,7 +108,7 @@
     </aside>
 
     <footer class="text-center text-muted py-4 small">
-      <p class="mb-1">&copy; 2025 SpellMaker Calculator — A fan project for the Elder Scrolls community.</p>
+      <p class="mb-1">&copy; 2025 Spellmaking Altar Calculator — A fan project for the Elder Scrolls community.</p>
       <p class="mb-1">Not affiliated with or endorsed by Bethesda Softworks or ZeniMax Media.</p>
       <p>
         <a href="/privacy.html">Privacy Policy</a> •
@@ -123,5 +123,8 @@
   <!-- Módulos JS: Autenticação e Lógica Principal -->
   <script type="module" src="./assets/js/authentication.js"></script>
   <script type="module" src="./assets/js/main.js"></script>
+
+
 </body>
+
 </html>
