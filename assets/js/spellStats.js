@@ -147,7 +147,6 @@ export function initializeSpellStats(containerId) {
             <th><b>Magicka Cost</b></th>
             <th><b>Gold Cost</b></th>
             <th><b>School</b></th>
-            <th><b>Effect</b></th>
             <th><b>Level</b></th>
         </tr>
     `;
@@ -191,15 +190,11 @@ export async function updateSpellStats() {
     schCell.textContent = finalStats.highestSchool;
     schCell.setAttribute('data-label', 'School');
 
-    const effCell = document.createElement('td');
-    effCell.textContent = finalStats.highestEffect;
-    effCell.setAttribute('data-label', 'Effect');
-
     const lvlCell = document.createElement('td');
     lvlCell.textContent = level;
     lvlCell.setAttribute('data-label', 'Level');
 
-    row.append(mkCell, goldCell, schCell, effCell, lvlCell);
+    row.append(mkCell, goldCell, schCell, lvlCell);
     tbody.appendChild(row);
 
     console.log('[updateSpellStats] row rendered:', {
