@@ -33,7 +33,7 @@ function getAdjustedSkillsInfo() {
         .filter(([school]) => school !== 'Luck')
         .map(([school, oldVal]) => ({
             school,
-            adjusted: oldVal + factor
+            adjusted: Math.min((oldVal + factor),100)
         }));
 
     console.log('[getAdjustedSkillsInfo] adjusted:', adjusted);

@@ -150,14 +150,43 @@ export async function createSpellBuilderTable(containerId, spellsJsonPath) {
                 effectSelect.disabled = true;
             }
         };
-
         // 6. Desabilita Area se Range for Self
         rangeSelect.onchange = () => {
             if (rangeSelect.value === 'Self') {
-                areaInput.value = 0;
-                areaInput.disabled = true;
+            areaInput.value = 0;
+            areaInput.disabled = true;
             } else {
-                areaInput.disabled = false;
+            areaInput.disabled = false;
+            }
+        };
+
+        // 7. Se a school for Conjuration, trava o range em Self
+        schoolSelect.onchange = () => {
+            const school = schoolSelect.value;
+            effectSelect.innerHTML = `<option value="">Select Effect...</option>`;
+            if (school && spellsBySchool[school]) {
+            Object.keys(spellsBySchool[school])
+                .sort()
+                .forEach(effectName => {
+                const opt = document.createElement('option');
+                opt.value = effectName;
+                opt.textContent = effectName;
+                effectSelect.appendChild(opt);
+                });
+            effectSelect.disabled = false;
+            } else {
+            effectSelect.disabled = true;
+            }
+
+            if (school === 'Conjuration') {
+            rangeSelect.value = 'Self';
+            rangeSelect.disabled = true;
+            areaInput.value = 0;
+            areaInput.disabled = true;
+            } else {
+            rangeSelect.disabled = false;
+            // Trigger rangeSelect.onchange to update areaInput state
+            rangeSelect.onchange();
             }
         };
     }
