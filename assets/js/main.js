@@ -180,23 +180,25 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
   initializeSpellStats(spellStatsContainer);
   updateSpellStats();
 
-  // 6.4) Observers para recálculo
+  // 6.4) Observers para recálculo automático
   const builderEl = document.getElementById(spellBuilderContainer);
   const skillsEl  = document.getElementById(skillsTableContainer);
 
+  // MutationObservers para adicionar/remover linhas
   new MutationObserver(updateSpellStats)
     .observe(builderEl, { childList: true, subtree: true });
   new MutationObserver(updateSpellStats)
     .observe(skillsEl,  { childList: true, subtree: true });
 
+  // Dispara recálculo em input, change e click (para botões de skillTable)
   [builderEl, skillsEl].forEach(el => {
     el.addEventListener('input',  updateSpellStats);
     el.addEventListener('change', updateSpellStats);
+    el.addEventListener('click',  updateSpellStats);
   });
 
   // ===== Funções auxiliares =====
 
-  // lê levels da skill table
   function extractSkillData() {
     const rows = document.querySelectorAll('#skillsTable tr');
     const skills = {};
@@ -209,7 +211,6 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
     return skills;
   }
 
-  // aplica levels na skill table
   function applySkillData(data) {
     document.querySelectorAll('#skillsTable tr').forEach(row => {
       const name = row.querySelector('td:first-child').textContent.trim();
@@ -218,7 +219,6 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
     });
   }
 
-  // lê efeitos da spell builder
   function extractSpellData() {
     const tbody = document.querySelector('#spellBuilderContainer table tbody');
     if (!tbody) return [];
@@ -235,7 +235,6 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
     });
   }
 
-  // aplica efeitos na spell builder
   function applySpellData(effects) {
     const tbody  = document.querySelector('#spellBuilderContainer table tbody');
     const addBtn = document.querySelector('#spellBuilderContainer button.btn-success');
@@ -244,9 +243,8 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
       addBtn.click();
       const row = tbody.rows[tbody.rows.length - 1];
       const [sC, eC, rC, mC, aC, dC] = row.cells;
-      const sSel = sC.querySelector('select');
-      sSel.value = e.school;
-      sSel.dispatchEvent(new Event('change'));
+      sC.querySelector('select').value = e.school;
+      sC.querySelector('select').dispatchEvent(new Event('change'));
       eC.querySelector('select').value = e.effect;
       rC.querySelector('select').value = e.range;
       mC.querySelector('input').value  = e.magnitude;
@@ -255,19 +253,16 @@ import { initializeSpellStats, updateSpellStats } from './spellStats.js';
     });
   }
 
-  // popula um <select> com opções
   function populateDropdown(sel, items) {
     sel.innerHTML = '<option value="">— select —</option>';
     items.forEach(({ id, name }) => {
       const o = document.createElement('option');
       o.value = id;
       o.textContent = name;
-      o.dataset.name = name;
       sel.appendChild(o);
     });
   }
 
-  // limpa um <select>
   function clearDropdown(sel) {
     sel.innerHTML = '';
   }
