@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="img/spellmakingaltarcalculatorlogo.png" type="image/png" />
 
   <!-- SEO básico -->
@@ -130,6 +131,16 @@
   <script type="module" src="./assets/js/authentication.js"></script>
   <script type="module" src="./assets/js/main.js"></script>
 
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(reg => console.log('Service Worker registrado:', reg.scope))
+          .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+      });
+    }
+  </script>
 
 </body>
 
