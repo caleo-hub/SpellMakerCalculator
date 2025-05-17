@@ -1,6 +1,6 @@
 {
   "name": "Spellmaking Altar Calculator",
-  "short_name": "Spellmaker",
+  "short_name": "Spellmaking Calculator",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
