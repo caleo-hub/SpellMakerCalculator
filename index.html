@@ -37,8 +37,12 @@
       <div class="auth-crud d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3 mt-4">
         <!-- Login / Logout -->
         <div class="auth-controls d-flex gap-2">
-          <button id="btnGoogleLogin" class="btn btn-outline-primary">Login with Google</button>
-          <button id="btnLogout"      class="btn btn-outline-danger d-none">Logout</button>
+          <button id="btnGoogleLogin" class="btn google-btn">
+            <img src="https://developers.google.com/identity/images/g-logo.png"
+                 alt="Google logo" width="18" height="18">
+            <span>Sign in with Google</span>
+          </button>
+          <button id="btnLogout" class="btn btn-outline-danger d-none">Logout</button>
         </div>
 
         <!-- Characters CRUD -->
@@ -57,7 +61,7 @@
           <button id="btnDeleteSpell" class="btn btn-sm btn-danger"  disabled>Delete</button>
         </div>
       </div>
-        </header>
+    </header>
 
     <main>
       <!-- Skills Table -->
