@@ -5,12 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- favicon -->
+  <link rel="icon" href="img/spellmakingaltarcalculatorlogo.png" type="image/png" />
+
   <!-- SEO básico -->
   <title>Spellmaking Altar Calculator – Craft and Calculate Spells</title>
   <meta name="description"
     content="Instant web tool to craft and optimize custom spells for The Elder Scrolls IV: Oblivion. Magic School Skills, Spell Builder & Spell Stats" />
   <meta name="keywords" content="Oblivion, SpellMaker, Spell Calculator, Magic School, Spell Builder" />
-  <link rel="canonical" href="https://your-domain.com/" />
+  <link rel="canonical" href="https://https://spellmakingaltarcalculator.netlify.app/" />
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7920787159543858"
     crossorigin="anonymous"></script>
@@ -34,11 +37,16 @@
 <body>
   <div class="container py-4">
     <!-- HEADER + AUTH & CRUD CONTROLS -->
-    <header class="mb-5">
-      <h1 class="display-6">Spellmaking Altar Calculator</h1>
-      <p class="text-muted">Craft and calculate your custom Oblivion spells cost instantly.</p>
+    <header class="mb-5 d-flex flex-column flex-md-row align-items-center justify-content-between">
+      <div class="d-flex align-items-center mb-4 mb-md-0">
+        <img src="img/spellmakingaltarcalculatorlogo.png" alt="Logo" width="150" height="150" class="me-3">
+        <div>
+          <h1 class="display-6 mb-0">Spellmaking Altar Calculator</h1>
+          <p class="text-muted mb-0">Craft and calculate your custom Oblivion spells cost instantly.</p>
+        </div>
+      </div>
 
-      <div class="auth-crud d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3 mt-4">
+      <div class="auth-crud d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
         <!-- Login / Logout -->
         <div class="auth-controls d-flex gap-2">
           <button id="btnGoogleLogin" class="btn google-btn">
@@ -123,8 +131,6 @@
   <!-- Módulos JS: Autenticação e Lógica Principal -->
   <script type="module" src="./assets/js/authentication.js"></script>
   <script type="module" src="./assets/js/main.js"></script>
-
-
 </body>
 
 </html>
