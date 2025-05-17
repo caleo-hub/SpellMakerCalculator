@@ -1,4 +1,4 @@
-async function createSpellBuilderTable(containerId, spellsJsonPath) {
+export async function createSpellBuilderTable(containerId, spellsJsonPath) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
@@ -18,6 +18,7 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
         <tr>
             <th><strong>School</strong></th>
             <th><strong>Effect</strong></th>
+            <th><strong>Range</strong></th>
             <th><strong>Magnitude</strong></th>
             <th><strong>Area</strong></th>
             <th><strong>Duration</strong></th>
@@ -43,7 +44,7 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
     function addRow() {
         const row = document.createElement('tr');
 
-        // 4.1 Select de School (sm)
+        // School
         const schoolCell = document.createElement('td');
         schoolCell.setAttribute('data-label', 'School');
         const schoolSelect = document.createElement('select');
@@ -51,12 +52,13 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
         schoolSelect.innerHTML = `<option value="">Select School...</option>`;
         schools.forEach(s => {
             const o = document.createElement('option');
-            o.value = s; o.textContent = s;
+            o.value = s;
+            o.textContent = s;
             schoolSelect.appendChild(o);
         });
         schoolCell.appendChild(schoolSelect);
 
-        // 4.2 Select de Effect (sm)
+        // Effect
         const effectCell = document.createElement('td');
         effectCell.setAttribute('data-label', 'Effect');
         const effectSelect = document.createElement('select');
@@ -65,7 +67,20 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
         effectSelect.innerHTML = `<option value="">Select Effect...</option>`;
         effectCell.appendChild(effectSelect);
 
-        // 4.3 Magnitude (sm)
+        // Range
+        const rangeCell = document.createElement('td');
+        rangeCell.setAttribute('data-label', 'Range');
+        const rangeSelect = document.createElement('select');
+        rangeSelect.className = 'form-select form-select-sm';
+        ['Touch', 'Target', 'Self'].forEach(r => {
+            const o = document.createElement('option');
+            o.value = r;
+            o.textContent = r;
+            rangeSelect.appendChild(o);
+        });
+        rangeCell.appendChild(rangeSelect);
+
+        // Magnitude
         const magCell = document.createElement('td');
         magCell.setAttribute('data-label', 'Magnitude');
         const magInput = document.createElement('input');
@@ -75,27 +90,28 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
         magInput.placeholder = '0';
         magCell.appendChild(magInput);
 
-        // 4.4 Area (sm)
+        // Area
         const areaCell = document.createElement('td');
         areaCell.setAttribute('data-label', 'Area');
         const areaInput = document.createElement('input');
         areaInput.type = 'number';
         areaInput.className = 'form-control form-control-sm';
         areaInput.min = 0;
+        areaInput.value = 0;
         areaInput.placeholder = '0';
         areaCell.appendChild(areaInput);
 
-        // 4.5 Duration (sm)
+        // Duration
         const durCell = document.createElement('td');
         durCell.setAttribute('data-label', 'Duration');
         const durInput = document.createElement('input');
         durInput.type = 'number';
         durInput.className = 'form-control form-control-sm';
-        durInput.min = 0;
-        durInput.placeholder = '0';
+        durInput.min = 1;
+        durInput.placeholder = '1';
         durCell.appendChild(durInput);
 
-        // 4.6 Actions: botão remover
+        // Actions
         const actionCell = document.createElement('td');
         actionCell.setAttribute('data-label', 'Actions');
         const removeBtn = document.createElement('button');
@@ -104,10 +120,11 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
         removeBtn.onclick = () => row.remove();
         actionCell.appendChild(removeBtn);
 
-        // 4.7 Monta a linha
+        // Monta a linha na ordem desejada
         row.append(
             schoolCell,
             effectCell,
+            rangeCell,
             magCell,
             areaCell,
             durCell,
@@ -133,8 +150,17 @@ async function createSpellBuilderTable(containerId, spellsJsonPath) {
                 effectSelect.disabled = true;
             }
         };
-    }
 
+        // 6. Desabilita Area se Range for Self
+        rangeSelect.onchange = () => {
+            if (rangeSelect.value === 'Self') {
+                areaInput.value = 0;
+                areaInput.disabled = true;
+            } else {
+                areaInput.disabled = false;
+            }
+        };
+    }
 
     // Linha inicial
     addRow();

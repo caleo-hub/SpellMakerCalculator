@@ -1,4 +1,4 @@
-function createSkillTable(schools, tableId) {
+export function createSkillTable(schools, tableId) {
     const table = document.getElementById(tableId);
     if (!table) return;
 
@@ -21,7 +21,7 @@ function createSkillTable(schools, tableId) {
 
         const input = document.createElement('input');
         input.type = 'number';
-        input.value = 0;
+        input.value = 50;
         input.className = 'form-control skill-input';
         input.min = 0;
 
