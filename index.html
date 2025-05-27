@@ -142,15 +142,64 @@
   <script type="module" src="./assets/js/main.js"></script>
 
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then(reg => console.log('Service Worker registrado:', reg.scope))
-          .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js').then(reg => {
+    let newWorker;
+
+    // Quando há nova versão instalada e esperando
+    function showUpdateBanner() {
+      const banner = document.getElementById('updateBanner');
+      const btn = document.getElementById('btnUpdate');
+      banner.style.display = 'block';
+
+      btn.addEventListener('click', () => {
+        newWorker.postMessage({ action: 'skipWaiting' });
       });
     }
-  </script>
+
+    if (reg.waiting) {
+      newWorker = reg.waiting;
+      showUpdateBanner();
+    }
+
+    reg.addEventListener('updatefound', () => {
+      newWorker = reg.installing;
+
+      newWorker.addEventListener('statechange', () => {
+        if (
+          newWorker.state === 'installed' &&
+          navigator.serviceWorker.controller
+        ) {
+          showUpdateBanner();
+        }
+      });
+    });
+
+    // Recarrega a página quando o novo SW assumir controle
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      window.location.reload();
+    });
+  });
+}
+</script>
+
+<div id="updateBanner" style="
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #ffc107;
+  color: #000;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  z-index: 9999;
+">
+  New version available.
+  <button id="btnUpdate" style="margin-left: 10px; font-weight: bold; padding: 5px 10px;">Update now</button>
+</div>
+</div>
 
 </body>
 
