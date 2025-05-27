@@ -98,8 +98,8 @@ function calculateAdjustedCost(baseCosts, adjustedSkills) {
         totalCostRaw += Math.floor(item.cost);
         totalCost += weighted;
 
-        if (totalCostRaw > highest.cost) {
-            highest = { cost: totalCostRaw, school: item.school, effect: item.effect, range: item.range };
+        if (Math.floor(item.cost) > highest.cost) {
+            highest = { cost: Math.floor(item.cost), school: item.school, effect: item.effect, range: item.range };
         console.log('[calculateAdjustedCost] New highest spell:', {
             cost: totalCostRaw,
             school: item.school,
