@@ -100,7 +100,14 @@ function calculateAdjustedCost(baseCosts, adjustedSkills) {
 
         if (totalCostRaw > highest.cost) {
             highest = { cost: totalCostRaw, school: item.school, effect: item.effect, range: item.range };
+        console.log('[calculateAdjustedCost] New highest spell:', {
+            cost: totalCostRaw,
+            school: item.school,
+            effect: item.effect,
+            range: item.range
+        });
         }
+
     });
 
     const magickaCost = totalCost.toFixed(0);
