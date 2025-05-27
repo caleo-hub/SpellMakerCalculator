@@ -1,5 +1,4 @@
-const CACHE_NAME = "spellmaker-cache-v3"; // <--- aumente a versão em cada deploy
-
+const CACHE_NAME = "spellmaker-cache-v2";
 const urlsToCache = [
   "/index.html",
   "/manifest.json",
@@ -24,44 +23,34 @@ const urlsToCache = [
   "/img/spellmakingaltarcalculatorlogo.png"
 ];
 
-// Instala e adiciona arquivos ao cache
-self.addEventListener("install", (event) => {
+// Instala e adiciona ao cache
+self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
-    }).then(() => self.skipWaiting()) // <-- ativa imediatamente
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(urlsToCache))
+      .then(() => self.skipWaiting())
   );
 });
 
-// Ativação: limpa caches antigos
-self.addEventListener("activate", (event) => {
+// Ativa e limpa caches antigos se houver
+self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then((keyList) =>
+    caches.keys().then(keyList =>
       Promise.all(
-        keyList.map((key) => {
+        keyList.map(key => {
           if (key !== CACHE_NAME) {
             return caches.delete(key);
           }
         })
       )
-    ).then(() => self.clients.claim()) // <-- força controle imediato
+    ).then(() => self.clients.claim())
   );
 });
 
-// Intercepta requisições
-self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
-
+// Intercepta requisições e serve do cache quando possível
+self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
   );
-});
-
-// Permite atualização manual via postMessage
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.action === "skipWaiting") {
-    self.skipWaiting();
-  }
 });
