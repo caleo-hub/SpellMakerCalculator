@@ -144,12 +144,24 @@
 
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then(reg => console.log('Service Worker registrado:', reg.scope))
-          .catch(err => console.error('Erro ao registrar o Service Worker:', err));
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(reg => {
+      if (reg.waiting) {
+        reg.waiting.postMessage({ action: 'skipWaiting' });
+        window.location.reload();
+      }
+
+      reg.addEventListener('updatefound', () => {
+        const newSW = reg.installing;
+        newSW.addEventListener('statechange', () => {
+          if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+            newSW.postMessage({ action: 'skipWaiting' });
+            window.location.reload();
+          }
+        });
       });
-    }
+    });
+}
   </script>
 
 </body>
