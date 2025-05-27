@@ -98,8 +98,8 @@ function calculateAdjustedCost(baseCosts, adjustedSkills) {
         totalCostRaw += Math.floor(item.cost);
         totalCost += weighted;
 
-        if (weighted > highest.cost) {
-            highest = { cost: weighted, school: item.school, effect: item.effect, range: item.range };
+        if (totalCostRaw > highest.cost) {
+            highest = { cost: totalCostRaw, school: item.school, effect: item.effect, range: item.range };
         }
     });
 
