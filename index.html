@@ -145,44 +145,37 @@
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js').then(reg => {
-    let newWorker;
-
-    // Quando há nova versão instalada e esperando
-    function showUpdateBanner() {
-      const banner = document.getElementById('updateBanner');
-      const btn = document.getElementById('btnUpdate');
-      banner.style.display = 'block';
-
-      btn.addEventListener('click', () => {
-        newWorker.postMessage({ action: 'skipWaiting' });
-      });
-    }
-
+    // Já tem nova versão esperando?
     if (reg.waiting) {
-      newWorker = reg.waiting;
-      showUpdateBanner();
+      reg.waiting.postMessage({ action: 'skipWaiting' });
     }
 
+    // Detecta nova instalação
     reg.addEventListener('updatefound', () => {
-      newWorker = reg.installing;
+      const newWorker = reg.installing;
 
       newWorker.addEventListener('statechange', () => {
         if (
           newWorker.state === 'installed' &&
           navigator.serviceWorker.controller
         ) {
-          showUpdateBanner();
+          newWorker.postMessage({ action: 'skipWaiting' });
         }
       });
     });
 
-    // Recarrega a página quando o novo SW assumir controle
+    // Quando o novo SW assume o controle, recarrega a página (só uma vez)
+    let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-      window.location.reload();
+      if (!refreshing) {
+        window.location.reload();
+        refreshing = true;
+      }
     });
   });
 }
 </script>
+
 
 
 

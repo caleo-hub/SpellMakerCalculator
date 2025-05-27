@@ -1,4 +1,4 @@
-const CACHE_NAME = "spellmaker-cache-v4"; // <--- aumente a versão em cada deploy
+const CACHE_NAME = "spellmaker-cache-v5"; // <--- aumente a versão em cada deploy
 
 const urlsToCache = [
   "/index.html",
